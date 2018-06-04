@@ -98,11 +98,14 @@ RUN set -eux; \
 # Explicitly set user/group IDs
 RUN set -eux; \
     cp -r "/etc/skel" "/${DEFAULT_USER}"; \
-    chown -R ${DEFAULT_UID}:${DEFAULT_GID} "/${DEFAULT_USER}"; \
     groupadd -r ${DEFAULT_GROUP} --gid=${DEFAULT_GID}; \
     useradd -r -d "/${DEFAULT_USER}" \
         -g ${DEFAULT_GROUP} --uid=${DEFAULT_UID} ${DEFAULT_USER}; \
-    echo "${DEFAULT_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers;
+    echo "${DEFAULT_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers; \
+    chown -R "${DEFAULT_UID}:${DEFAULT_GID}" \
+        "/${DEFAULT_USER}" \
+        "${CARGO_HOME}/git" \
+        "${CARGO_HOME}/registry";
 
 # Grab gosu (https://github.com/tianon/gosu/blob/master/INSTALL.md)
 RUN set -ex; \
