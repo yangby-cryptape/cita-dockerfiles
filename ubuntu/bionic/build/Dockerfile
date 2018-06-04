@@ -97,6 +97,8 @@ RUN set -eux; \
 
 # Explicitly set user/group IDs
 RUN set -eux; \
+    cp -r "/etc/skel" "/${DEFAULT_USER}"; \
+    chown -R ${DEFAULT_UID}:${DEFAULT_GID} "/${DEFAULT_USER}"; \
     groupadd -r ${DEFAULT_GROUP} --gid=${DEFAULT_GID}; \
     useradd -r -d "/${DEFAULT_USER}" \
         -g ${DEFAULT_GROUP} --uid=${DEFAULT_UID} ${DEFAULT_USER}; \
