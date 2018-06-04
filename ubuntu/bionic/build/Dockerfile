@@ -102,6 +102,7 @@ RUN set -eux; \
     useradd -r -d "/${DEFAULT_USER}" \
         -g ${DEFAULT_GROUP} --uid=${DEFAULT_UID} ${DEFAULT_USER}; \
     echo "${DEFAULT_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers; \
+    mkdir -p "${CARGO_HOME}/git" "${CARGO_HOME}/registry"; \
     chown -R "${DEFAULT_UID}:${DEFAULT_GID}" \
         "/${DEFAULT_USER}" \
         "${CARGO_HOME}/git" \
