@@ -123,7 +123,7 @@ RUN set -ex; \
     done; \
     gpg --batch --verify "${INSTALL_PREFIX}/bin/gosu.asc" \
         "${INSTALL_PREFIX}/bin/gosu"; \
-    rm -r "$GNUPGHOME" "${INSTALL_PREFIX}/bin/gosu.asc"; \
+    rm -rf "$GNUPGHOME" "${INSTALL_PREFIX}/bin/gosu.asc"; \
     \
     chmod +x "${INSTALL_PREFIX}/bin/gosu"; \
 # verify that the binary works
