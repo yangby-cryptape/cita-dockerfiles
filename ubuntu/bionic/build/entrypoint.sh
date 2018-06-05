@@ -2,7 +2,7 @@
 
 set -Eeo pipefail
 
-RUN_AS=0:0
+RUN_AS="$(stat --format='%u:%g' .)"
 DEFAULT_COMMAND="/bin/bash"
 
 function usage () {
@@ -12,11 +12,13 @@ Usage:
     $(basename $0) [--run_as UID:GID] [COMMAND [ARG1 [ARG2 [...]]]]
 
         UID:
-                The user id used to run your command, default is 0.
+                The user id used to run your command.
                 Do not use user name.
+                Default: the user id of current directory.
         GID:
-                The group id used to run your command, default is 0.
+                The group id used to run your command.
                 Do not use group name.
+                Default: the user id of current directory.
 
         COMMAND:
                 If no command provided, the default is '${DEFAULT_COMMAND}'.
@@ -36,7 +38,6 @@ function main () {
     fi
 
     chown -R ${RUN_AS} \
-        "${WORKDIR}" \
         "${CARGO_HOME}/git" \
         "${CARGO_HOME}/registry"
 

@@ -5,9 +5,6 @@ ENV SOLIDITY_VERSION="0.4.19"
 ENV PYETHEREUM_VERSION="3d5ec14032cc471f4dcfc7cc5c947294daf85fe0"
 ENV GOSU_VERSION="1.10"
 ENV KCOV_VERSION="35"
-ENV WORKDIR="/cita"
-
-WORKDIR /cita
 
 # The install-prefix for third-party executable files
 ENV INSTALL_PREFIX="/opt"
@@ -135,5 +132,10 @@ RUN set -ex; \
 # Default runtime environment
 COPY entrypoint.sh "${INSTALL_PREFIX}/bin/"
 RUN set -ex; \
-    chmod +x "${INSTALL_PREFIX}/bin/entrypoint.sh";
+    chmod +x "${INSTALL_PREFIX}/bin/entrypoint.sh"; \
+    mkdir -p /cita \
+        "${CARGO_HOME}/registry" "${CARGO_HOME}/git"; \
+    chmod 777 /cita \
+        "${CARGO_HOME}/registry" "${CARGO_HOME}/git";
+WORKDIR /cita
 ENTRYPOINT ["entrypoint.sh"]
