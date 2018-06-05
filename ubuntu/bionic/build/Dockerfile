@@ -136,6 +136,7 @@ RUN set -ex; \
     mkdir -p /cita \
         "${CARGO_HOME}/registry" "${CARGO_HOME}/git"; \
     chmod 777 /cita \
-        "${CARGO_HOME}/registry" "${CARGO_HOME}/git";
+        "${CARGO_HOME}/registry" "${CARGO_HOME}/git"; \
+    echo "ALL ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers;
 WORKDIR /cita
 ENTRYPOINT ["entrypoint.sh"]
