@@ -77,11 +77,8 @@ RUN set -eux; \
 
 # Install solidity
 RUN set -eux; \
-    curl -o "solidity-ubuntu-trusty.zip" \
-        -L "https://github.com/ethereum/solidity/releases/download/v${SOLIDITY_VERSION}/solidity-ubuntu-trusty.zip"; \
-    unzip solidity-ubuntu-trusty.zip -d solidity-ubuntu; \
-    mv solidity-ubuntu/solc "${INSTALL_PREFIX}/bin"; \
-    rm -rf solidity-ubuntu solidity-ubuntu-trusty.zip;
+    curl -o "${INSTALL_PREFIX}/bin/solc" \
+        -L "https://github.com/ethereum/solidity/releases/download/v${SOLIDITY_VERSION}/solc-static-linux";
 
 # Add GmSSL support
 COPY libgmssl.so.1.0.0 /usr/local/lib/
