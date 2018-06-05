@@ -1,16 +1,13 @@
 FROM ubuntu:bionic
 
-WORKDIR /tmp
-
 ENV RUST_VERSION="nightly-2018-05-23"
 ENV SOLIDITY_VERSION="0.4.19"
 ENV PYETHEREUM_VERSION="3d5ec14032cc471f4dcfc7cc5c947294daf85fe0"
 ENV GOSU_VERSION="1.10"
 ENV KCOV_VERSION="35"
-ENV DEFAULT_GROUP="cita"
-ENV DEFAULT_USER="cita"
-ENV DEFAULT_GID=708
-ENV DEFAULT_UID=708
+ENV WORKDIR="/cita"
+
+WORKDIR /cita
 
 # The install-prefix for third-party executable files
 ENV INSTALL_PREFIX="/opt"
@@ -95,19 +92,6 @@ RUN set -eux; \
     ln -srf /usr/local/lib/libgmssl.so.1.0.0 /usr/local/lib/libgmssl.so; \
     ldconfig;
 
-# Explicitly set user/group IDs
-RUN set -eux; \
-    cp -r "/etc/skel" "/${DEFAULT_USER}"; \
-    groupadd -r ${DEFAULT_GROUP} --gid=${DEFAULT_GID}; \
-    useradd -r -d "/${DEFAULT_USER}" \
-        -g ${DEFAULT_GROUP} --uid=${DEFAULT_UID} ${DEFAULT_USER}; \
-    echo "${DEFAULT_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers; \
-    mkdir -p "${CARGO_HOME}/git" "${CARGO_HOME}/registry"; \
-    chown -R "${DEFAULT_UID}:${DEFAULT_GID}" \
-        "/${DEFAULT_USER}" \
-        "${CARGO_HOME}/git" \
-        "${CARGO_HOME}/registry";
-
 # Grab gosu (https://github.com/tianon/gosu/blob/master/INSTALL.md)
 RUN set -ex; \
     \
@@ -152,6 +136,4 @@ RUN set -ex; \
 COPY entrypoint.sh "${INSTALL_PREFIX}/bin/"
 RUN set -ex; \
     chmod +x "${INSTALL_PREFIX}/bin/entrypoint.sh";
-WORKDIR "/${DEFAULT_USER}"
 ENTRYPOINT ["entrypoint.sh"]
-CMD ["/bin/bash"]

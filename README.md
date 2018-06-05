@@ -22,4 +22,4 @@ Supported tags and respective `Dockerfile` links:
 [cita-repo-url]: https://github.com/cryptape/cita
 [my-docker-hub-url]: https://hub.docker.com/u/yangby0cryptape/
 [official-cita-build-url]: https://github.com/cryptape/cita-build
-[bionic-url]: https://github.com/yangby-cryptape/cita-dockerfiles/ttee/master/master/bionic/build
+[bionic-url]: https://github.com/yangby-cryptape/cita-dockerfiles/tree/master/ubuntu/bionic/build
