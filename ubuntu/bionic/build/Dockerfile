@@ -78,7 +78,8 @@ RUN set -eux; \
 # Install solidity
 RUN set -eux; \
     curl -o "${INSTALL_PREFIX}/bin/solc" \
-        -L "https://github.com/ethereum/solidity/releases/download/v${SOLIDITY_VERSION}/solc-static-linux";
+        -L "https://github.com/ethereum/solidity/releases/download/v${SOLIDITY_VERSION}/solc-static-linux"; \
+    chmod +x "${INSTALL_PREFIX}/bin/solc";
 
 # Add GmSSL support
 COPY libgmssl.so.1.0.0 /usr/local/lib/
