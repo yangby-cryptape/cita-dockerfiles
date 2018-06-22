@@ -39,6 +39,10 @@ function add_group_and_user_if_not_existed() {
     if [ "${has_uid}" -eq 0 ]; then
         useradd -g ${gid} --uid=${uid} ${uid}
     fi
+    if [ ! -d "/home/${uid}" ]; then
+        cp -r "/etc/skel" "/home/${uid}"
+        chown -R "${uid}:${gid}" "/home/${uid}"
+    fi
 }
 
 function main () {
