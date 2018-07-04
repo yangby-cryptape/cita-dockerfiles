@@ -21,6 +21,7 @@ RUN set -eux; \
         build-essential \
         automake \
         cmake \
+        clang \
         pkg-config \
         binutils-dev \
         libtool \
