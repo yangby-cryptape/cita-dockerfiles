@@ -22,8 +22,8 @@ Supported tags and respective `Dockerfile` links:
 Start the docker as follows:
 
 ```bash
-docker run --rm -it
-    --workdir "${DOCKER_DIR}"
+docker run --rm -it \
+    --workdir "${DOCKER_DIR}" \
     --volume "${HOST_DIR}:${DOCKER_DIR}" \
     --volume "rust-registry:/opt/local/cargo/registry" \
     --volume "rust-git:/opt/local/cargo/git" \
