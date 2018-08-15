@@ -42,10 +42,11 @@ RUN set -eux; \
         curl \
         unzip \
         git \
-        vim-tiny \
+        vim \
         google-perftools \
         jq \
-        rabbitmq-server; \
+        rabbitmq-server \
+        proxychains; \
     rm -rf /var/lib/apt/lists/*;
 
 # Install rust toolchain
