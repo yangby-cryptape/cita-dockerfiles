@@ -82,12 +82,6 @@ RUN set -eux; \
         -L "https://github.com/ethereum/solidity/releases/download/v${SOLIDITY_VERSION}/solc-static-linux"; \
     chmod +x "${INSTALL_PREFIX}/bin/solc";
 
-# Add GmSSL support
-COPY libgmssl.so.1.0.0 /usr/local/lib/
-RUN set -eux; \
-    ln -srf /usr/local/lib/libgmssl.so.1.0.0 /usr/local/lib/libgmssl.so; \
-    ldconfig;
-
 # Grab gosu (https://github.com/tianon/gosu/blob/master/INSTALL.md)
 RUN set -ex; \
     \
