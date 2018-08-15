@@ -59,6 +59,7 @@ RUN set -eux; \
     rustup component add rustfmt-preview --toolchain "${RUST_VERSION}"; \
     rustup self update; \
     chmod -R a+w "${RUSTUP_HOME}" "${CARGO_HOME}"; \
+    cargo install clippy --version 0.0.204; \
     rustup --version; \
     cargo --version; \
     rustc --version;
