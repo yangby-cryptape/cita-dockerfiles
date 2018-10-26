@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 
-ENV RUST_VERSION="nightly-2018-05-23"
+ENV RUST_VERSION="nightly-2018-10-05"
 ENV SOLIDITY_VERSION="0.4.24"
 ENV PYETHEREUM_VERSION="3d5ec14032cc471f4dcfc7cc5c947294daf85fe0"
 ENV GOSU_VERSION="1.10"
@@ -57,9 +57,9 @@ RUN set -eux; \
     curl https://sh.rustup.rs -sSf \
         | sh -s -- -y --no-modify-path --default-toolchain "${RUST_VERSION}"; \
     rustup component add rustfmt-preview --toolchain "${RUST_VERSION}"; \
+    rustup component add clippy-preview --toolchain "${RUST_VERSION}"; \
     rustup self update; \
     chmod -R a+w "${RUSTUP_HOME}" "${CARGO_HOME}"; \
-    cargo install clippy --force --version 0.0.204; \
     rustup --version; \
     cargo --version; \
     rustc --version;
