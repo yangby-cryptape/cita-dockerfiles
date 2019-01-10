@@ -56,8 +56,8 @@ ENV PATH "${PATH}:${CARGO_HOME}/bin"
 RUN set -eux; \
     curl https://sh.rustup.rs -sSf \
         | sh -s -- -y --no-modify-path --default-toolchain "${RUST_VERSION}"; \
-    rustup component add rustfmt-preview --toolchain "${RUST_VERSION}"; \
-    rustup component add clippy-preview --toolchain "${RUST_VERSION}"; \
+    rustup component add rustfmt --toolchain "${RUST_VERSION}"; \
+    rustup component add clippy --toolchain "${RUST_VERSION}"; \
     rustup self update; \
     chmod -R a+w "${RUSTUP_HOME}" "${CARGO_HOME}"; \
     rustup --version; \
